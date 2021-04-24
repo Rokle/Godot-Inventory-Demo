@@ -106,15 +106,7 @@ func swap_items(slot_1:Node, slot_2:Node,var button_pressed = "none"):
 				slot_2.content[1] -=1
 		else:
 			return swap_items(slot_1,slot_2)
-	achievements_handler(slot_1, slot_2)
 
-func achievements_handler(slot1,slot2):
-	if slot1.type == "equipment_slot":
-		if slot1.content[0] == 106:
-			AllThingMatterForDialogs.has_lucky_rune_equip = true
-	elif slot2.type == "equipment_slot":
-		if slot1.content[0] == 106:
-			AllThingMatterForDialogs.has_lucky_rune_equip = true
 
 func open_inventory(opened):
 	inventory_is_open = opened
