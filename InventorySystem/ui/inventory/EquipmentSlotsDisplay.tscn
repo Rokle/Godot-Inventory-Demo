@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/inventory/InventorySlotDisplay.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/inventory/EquipmentSlotsDisplay.gd" type="Script" id=2]
+
+[node name="EquipmentSlotsDisplay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -492.0
+margin_bottom = -200.0
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 20.0
+margin_bottom = 120.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlotDisplay1" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 20.0
+margin_bottom = 20.0
+type = "equipment_slot"
+can_inventory_add = false
+types_to_place = [ [ "armor" ], [ "none" ] ]
+types_to_take = [ [ "any" ], [ "any" ] ]
+
+[node name="InventorySlotDisplay2" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 20.0
+margin_right = 20.0
+margin_bottom = 40.0
+type = "equipment_slot"
+can_inventory_add = false
+types_to_place = [ [ "armor" ], [ "none" ] ]
+types_to_take = [ [ "any" ], [ "any" ] ]
+
+[node name="InventorySlotDisplay3" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 40.0
+margin_right = 20.0
+margin_bottom = 60.0
+type = "equipment_slot"
+can_inventory_add = false
+types_to_place = [ [ "armor" ], [ "none" ] ]
+types_to_take = [ [ "any" ], [ "any" ] ]
+
+[node name="InventorySlotDisplay4" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 60.0
+margin_right = 20.0
+margin_bottom = 80.0
+type = "equipment_slot"
+can_inventory_add = false
+types_to_place = [ [ "armor" ], [ "none" ] ]
+types_to_take = [ [ "any" ], [ "any" ] ]
+
+[node name="InventorySlotDisplay5" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 80.0
+margin_right = 20.0
+margin_bottom = 100.0
+type = "equipment_slot"
+can_inventory_add = false
+types_to_place = [ [ "armor" ], [ "none" ] ]
+types_to_take = [ [ "any" ], [ "any" ] ]
+
+[node name="InventorySlotDisplay6" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 100.0
+margin_right = 20.0
+margin_bottom = 120.0
+type = "equipment_slot"
+can_inventory_add = false
+types_to_place = [ [ "armor" ], [ "none" ] ]
+types_to_take = [ [ "any" ], [ "any" ] ]
