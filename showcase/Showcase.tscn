@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://storages/small_chest/TestChest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/mouse/Mouse.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/inventory/Inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://PlayerShowcase.gd" type="Script" id=4]
+
+[node name="Showcase" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="chest1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 272, 176 )
+player = NodePath("../Player")
+inventory_id = "test_chest_1"
+
+[node name="chest2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 336, 176 )
+player = NodePath("../Player")
+inventory_id = "test_chest_2"
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="InventoryDisplay" parent="GUI" instance=ExtResource( 3 )]
+
+[node name="Mouse" parent="GUI" instance=ExtResource( 2 )]
