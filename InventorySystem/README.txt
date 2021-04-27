@@ -46,7 +46,8 @@ How to make custom cursor
 
 How to make your own storage:
 0) Don't forger to change code of player detection in res://storages/small_chest/ChestObj.gd to your needs
-1) Copy everything from res://storages/small_chest/ChestObj.gd and change sprite_type, storage_type, ui_type to your own
+1) Copy everything from res://storages/small_chest/ChestObj.gd and change sprite_type, storage_type, ui_type and inventory_id to your own
+1.1) Add in res://data/storages.json id of storage that you wrote in your storage
 2) In res://storages/small_chest/ChestObj.gd you will see, how you need to put your files
 2.1) 'res://storages/%s/sprites/%sSprFrames.tres' % [storage_type,sprite_type] etc
 3) In res://ui/storages/StorageDisplay.gd you will see how put ui of chests
