@@ -26,7 +26,6 @@ LanguageData="*res://data/LanguageData.gd"
 StorageData="*res://data/StorageData.gd"
 CorrectedMouseEnter="*res://preload_scripts/CorrectedMouseEnter.gd"
 InventoryManager="*res://preload_scripts/InventoryManager.gd"
-AllThingMatterForDialogs="*res://preload_scripts/AllThingMatterForDialogs.gd"
 
 [display]
 
