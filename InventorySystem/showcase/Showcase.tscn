@@ -20,8 +20,11 @@ position = Vector2( 336, 176 )
 player = NodePath("../Player")
 inventory_id = "test_chest_2"
 
+[node name="MouseUI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Mouse" parent="MouseUI" instance=ExtResource( 2 )]
+
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="InventoryDisplay" parent="GUI" instance=ExtResource( 3 )]
-
-[node name="Mouse" parent="GUI" instance=ExtResource( 2 )]
