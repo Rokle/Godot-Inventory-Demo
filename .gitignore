@@ -1,9 +1,3 @@
-# Ignore test files
-default_env.tres
-icon.png
-icon.png.import
-project.godot
-
 # Godot-specific ignores
 .import/
 export.cfg
