@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://fonts/AbaddonFont.tres" type="DynamicFont" id=1]
+
+[node name="ItemInventorySprite" type="Sprite"]
+offset = Vector2( 8, 8 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 9.0
+margin_right = 14.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

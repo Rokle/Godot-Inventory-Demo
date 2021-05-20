@@ -1,0 +1,25 @@
+{
+"nothing": {
+	"name": "",
+},
+"rock": {
+	"name": "Rock",
+	"description": "Just rock"
+},
+"bug_net": {
+	"name": "Bug Net",
+	"description": "Nothing"
+},
+"bottel_of_water": {
+	"name": "Bottel Of Water",
+	"description": "Water"
+},
+"bottel_of_nothing": {
+	"name": "Empty Bottel",
+	"description": "Not water \nLol"
+},
+"armor": {
+	"name": "Armor",
+	"description": "The best armor in the demo \nWear it with pride"
+},
+}
