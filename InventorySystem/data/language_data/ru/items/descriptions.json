@@ -1,0 +1,25 @@
+{
+"nothing": {
+	"name": "",
+},
+"rock": {
+	"name": "Камень",
+	"description": "Просто камень"
+},
+"bug_net": {
+	"name": "Сачок",
+	"description": "Ничего"
+},
+"bottel_of_water": {
+	"name": "Бутылёк с водой",
+	"description": "Вода"
+},
+"bottel_of_nothing": {
+	"name": "Пустой Бутылёк",
+	"description": "Не вода"
+},
+"armor": {
+	"name": "Броня",
+	"description": "Лучшая броня в демо \nНоси её с гордостью"
+},
+}

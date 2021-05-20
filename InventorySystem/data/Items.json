@@ -1,0 +1,41 @@
+{
+  "nothing": {
+    "properties": [[]],
+    "tags": [],
+    "max_amount": 1,
+    "texture": "res://items/inventory_sprites/nothing.png"
+  },
+  "rock": {
+    "properties": [[]],
+    "tags": [],
+    "max_amount": 99,
+    "texture": "res://items/inventory_sprites/rock.png"
+  },
+  "bug_net": {
+    "properties": [[]],
+    "tags": [],
+    "usage": [],
+    "max_amount": 1,
+    "texture": "res://items/inventory_sprites/bug_net.png"
+  },
+  "bottel_of_water": {
+    "properties": [[]],
+    "tags": ["usable_on_yourself"],
+    "colour": "ffffff",
+    "max_amount": 1,
+    "texture": "res://items/inventory_sprites/bottel_of_water.png"
+   },
+   "bottel_of_nothing": {
+    "properties": [[]],
+    "tags": [],
+    "max_amount": 16,
+    "texture": "res://items/inventory_sprites/bottel_of_nothing.png"
+    },
+   "armor": {
+     "properties": [["defense",10]],
+    "tags": ["armor"],
+    "max_amount": 1,
+    "texture": "res://items/inventory_sprites/armor.png"
+    }
+
+}
