@@ -30,8 +30,7 @@ var distributing = false
 var division_by_one_item = false
 var distribute_items_to = [] setget divide_items
 
-var collecting_items = false
-var collecting_items_finished = true
+var double_click = false
 
 var last_hovered_slot
 
@@ -92,34 +91,14 @@ func _input(event):
 		description_container.position.y = window_height - position.y - 6 - description.background.rect_size.y  if position.y + description.background.rect_size.y + 6 > window_height else 0
 	if event is InputEventMouseButton:
 		button_pressed = int(Input.is_action_just_pressed("RightClick"))-int(Input.is_action_just_pressed("LeftClick"))
-		if button_pressed != -1:
-			collecting_items = false
-		click_used = true if button_pressed == 0 or collecting_items == true else false
-		if collecting_items == false:
-			button_released = int(Input.is_action_just_released("RightClick"))-int(Input.is_action_just_released("LeftClick"))
-			if button_released != 0 and collecting_items_finished == true:
-				if distributing == false:
-					if CorrectedMouseEnter.current_slot == null:
-						if last_hovered_slot != null:
-							last_hovered_slot._on_button_up()
-					else:
-						CorrectedMouseEnter.current_slot._on_button_up()
-				else:
-					for i in range(distribute_items_to.size()):
-						distribute_items_to[i][0].selected("none")
-				last_hovered_slot = null
-				distribute_items_to = []
-				distributing = false
-			collecting_items_finished = true
-			if CorrectedMouseEnter.current_slot != null and click_used == false:
-				distribute_content = content.duplicate()
-				click_used = true
-				last_hovered_slot = CorrectedMouseEnter.current_slot
-				division_by_one_item = true if button_pressed == 1 else false
-				divide_items(last_hovered_slot)
-		else:
-			collecting_items = false
-			collecting_items_finished = false
+		click_used = true if button_pressed == 0 else false
+		
+		if double_click == true:
+			double_click = false
+			return
+		
+		if event.doubleclick == true and button_pressed == -1:
+			double_click = true
 			InventoryManager.collect_items(CorrectedMouseEnter.current_slot.display.inventory_id, self)
 			if CorrectedMouseEnter.current_slot.display.inventory_id in ["player_inventory", "player_equipment"]:
 				if CorrectedMouseEnter.current_slot.display.storage_display.current_storage_display == null:
@@ -129,6 +108,28 @@ func _input(event):
 				InventoryManager.collect_items(CorrectedMouseEnter.current_slot.display.storage_display.current_storage_display.inventory_id, self)
 				return
 			InventoryManager.collect_items(CorrectedMouseEnter.current_slot.display.storage_display.inventory_display.inventory_id, self)
+			return
+		
+		button_released = int(Input.is_action_just_released("RightClick"))-int(Input.is_action_just_released("LeftClick"))
+		if button_released != 0:
+			if distributing == false:
+				if CorrectedMouseEnter.current_slot == null:
+					if last_hovered_slot != null:
+						last_hovered_slot._on_button_up()
+				else:
+					CorrectedMouseEnter.current_slot._on_button_up()
+			else:
+				for i in range(distribute_items_to.size()):
+					distribute_items_to[i][0].selected("none")
+			last_hovered_slot = null
+			distribute_items_to = []
+			distributing = false
+		if CorrectedMouseEnter.current_slot != null and click_used == false:
+			distribute_content = content.duplicate()
+			click_used = true
+			last_hovered_slot = CorrectedMouseEnter.current_slot
+			division_by_one_item = true if button_pressed == 1 else false
+			divide_items(last_hovered_slot)
 
 func get_pressed_button():
 	if button_pressed == 1:
@@ -145,6 +146,8 @@ func get_released_button():
 	return "none"
 
 func show_stats(slot_state, id):
+	if typeof(id) == TYPE_INT:
+		breakpoint
 	stats_id = id
 	if slot_state == "exit" or stats_id == "nothing" or content[0] != "nothing" or distributing == true:
 		description.visible = false
@@ -170,9 +173,6 @@ func slot_update(con):
 		content[1] = 0
 		content[2] = []
 	else:
-		if ItemData.item_data[content[0]]["max_amount"] != 1 and content[1] != ItemData.item_data[content[0]]["max_amount"]:
-			collecting_items = true
-			timer.start()
 		texture.texture = load(ItemData.item_data[content[0]]["texture"])
 		if content[1] > 1:
 			texture_text.text = str(content[1])
@@ -182,5 +182,4 @@ func slot_update(con):
 
 
 func _on_Timer_timeout():
-	collecting_items = false
-	collecting_items_finished = true
+	pass
