@@ -97,7 +97,7 @@ func _input(event):
 			double_click = false
 			return
 		
-		if event.doubleclick == true and button_pressed == -1:
+		if event.doubleclick == true and button_pressed == -1 and CorrectedMouseEnter.current_slot != null:
 			double_click = true
 			InventoryManager.collect_items(CorrectedMouseEnter.current_slot.display.inventory_id, self)
 			if CorrectedMouseEnter.current_slot.display.inventory_id in ["player_inventory", "player_equipment"]:
