@@ -19,7 +19,7 @@ var window_height = ProjectSettings.get_setting("display/window/size/height")
 var window_widht = ProjectSettings.get_setting("display/window/size/width")
 
 
-var click_used = false
+var click_used = true
 
 var storage_sprite
 var type = "mouse"
