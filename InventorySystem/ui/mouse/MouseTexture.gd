@@ -127,7 +127,7 @@ func _input(event):
 		
 		InventoryManager.collect_items(CorrectedMouseEnter.current_slot.display.inventory_id, self)
 		
-		if CorrectedMouseEnter.current_slot.display.inventory_id in Links.player_inventories_ids:
+		if CorrectedMouseEnter.current_slot.display.inventory_id in ["player_inventory", "player_equipment"]:
 			
 			if CorrectedMouseEnter.current_slot.display.storage_display.current_storage_display == null:
 				return
