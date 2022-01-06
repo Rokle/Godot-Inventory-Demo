@@ -1,9 +1,6 @@
 extends Node2D
 # make cursor texture
 
-var window_height = ProjectSettings.get_setting("display/window/size/height")
-var window_widht = ProjectSettings.get_setting("display/window/size/width")
-
 var content setget slot_update
 var storage = null
 var button_pressed = 0 setget ,get_pressed_button
@@ -23,6 +20,8 @@ var click_used = true
 var storage_sprite
 var type = "mouse"
 var inventory_id = "mouse"
+var pos = 0
+var slots = [self]
 
 var distribute_content
 var distributing = false
@@ -53,7 +52,13 @@ func _ready():
 	
 	InventoryManager.connect("inventory_opened", self, "inventory_changer")
 	
+	InventoryManager.connect("find_display",self,"display_found")
+	
 	$AnimationPlayer.play("Cursor")
+
+func display_found(id):
+	if id == inventory_id:
+		InventoryManager.display = self
 
 func distribute_items(slot):
 	
@@ -104,9 +109,7 @@ func _input(event):
 		position = event.position
 		CorrectedMouseEnter.is_mouse_enter_slot(position)
 		
-	if description.visible == true:
-		description_container.position.x = window_widht - position.x - 6 - description.background.rect_size.x  if position.x + description.background.rect_size.x + 6 > window_widht else 0
-		description_container.position.y = window_height - position.y - 6 - description.background.rect_size.y  if position.y + description.background.rect_size.y + 6 > window_height else 0
+		description.update_position(position)
 	
 	if not event is InputEventMouseButton:
 		return
@@ -189,6 +192,8 @@ func get_released_button():
 	return "none"
 
 func show_stats(slot_state, id):
+	if typeof(id) == TYPE_INT:
+		breakpoint
 	
 	stats_id = id
 	
