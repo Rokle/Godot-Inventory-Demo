@@ -16,6 +16,8 @@ var display
 var mouse_slot
 var selected_slot
 
+const empty_slot_preset = ["nothing",0,[]]
+
 var inventory_is_open = false setget open_inventory
 
 # items_props contain [[obj who add, obj where added,[id, amount]]...]
@@ -38,19 +40,21 @@ func add_item(inventory_id_of_place_where_add:String, content: Array, var use_ho
 	var max_amount = ItemData.item_data[item_id]["max_amount"]
 	if max_amount != 1:
 		for slot_pos in range (adding_interval[0],adding_interval[1],adding_step):
-			if item_id == add_place[slot_pos][0] and content[2] == add_place[slot_pos][2] and (display.slots[slot_pos].can_inventory_add == true or use_hot_key == true):
-				var con_holder = display.slots[slot_pos].content[1]
-				display.slots[slot_pos].content = [display.slots[slot_pos].content[0],min(max_amount,display.slots[slot_pos].content[1] + remaining_amount), content[2]]
-				remaining_amount = max(0, remaining_amount - max_amount + con_holder) 
-			if remaining_amount == 0:
-				return 0
+			if display.slots[slot_pos].can_swap_items(content) == true:
+				if item_id == add_place[slot_pos][0] and content[2] == add_place[slot_pos][2] and (display.slots[slot_pos].can_inventory_add == true or use_hot_key == true):
+					var con_holder = display.slots[slot_pos].content[1]
+					display.slots[slot_pos].content = [display.slots[slot_pos].content[0],min(max_amount,display.slots[slot_pos].content[1] + remaining_amount), content[2]]
+					remaining_amount = max(0, remaining_amount - max_amount + con_holder) 
+				if remaining_amount == 0:
+					return 0
 	if remaining_amount > 0:
 		for slot_pos in range (adding_interval[0],adding_interval[1],adding_step):
-			if display.slots[slot_pos].content[0] == "nothing" and (display.slots[slot_pos].can_inventory_add == true or use_hot_key == true):
-				display.slots[slot_pos].content = [item_id, min(remaining_amount,max_amount), content[2]]
-				remaining_amount -= display.slots[slot_pos].content[1]
-			if remaining_amount == 0:
-				return 0
+			if display.slots[slot_pos].can_swap_items(content) == true:
+				if display.slots[slot_pos].content[0] == "nothing" and (display.slots[slot_pos].can_inventory_add == true or use_hot_key == true):
+					display.slots[slot_pos].content = [item_id, min(remaining_amount,max_amount), content[2]]
+					remaining_amount -= min(remaining_amount,max_amount)
+				if remaining_amount == 0:
+					return 0
 	return remaining_amount
 
 func collect_items(inventory_id, collect_to):
@@ -62,10 +66,9 @@ func collect_items(inventory_id, collect_to):
 			if collect_to.content[1] == max_amount:
 				break
 
-func set_item(where_add:Node,content:Array):
-	if where_add != mouse_slot:
-		return
-	mouse_slot.content = content
+func set_item(id:String,pos:int,content:Array):
+	emit_signal("find_display", id)
+	display.slots[pos].content = content.duplicate(true)
 
 #slot_1 in most cases is mouse slot
 func swap_items(slot_1:Node, slot_2:Node,var button_pressed = "none"):
@@ -107,10 +110,7 @@ func swap_items(slot_1:Node, slot_2:Node,var button_pressed = "none"):
 		else:
 			return swap_items(slot_1,slot_2)
 
-
 func open_inventory(opened):
 	inventory_is_open = opened
 	emit_signal("inventory_opened", inventory_is_open)
-
-
 
