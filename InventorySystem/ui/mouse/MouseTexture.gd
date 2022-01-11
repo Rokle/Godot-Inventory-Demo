@@ -122,7 +122,7 @@ func _input(event):
 		double_clicked = false
 		return
 	
-	if event.doubleclick == true and button_pressed == -1 and CorrectedMouseEnter.current_slot != null:
+	if event.doubleclick == true and button_pressed == -1 and CorrectedMouseEnter.current_slot != null and content[0] != InventoryManager.empty_slot_preset[0]:
 		
 		double_clicked = true
 		
