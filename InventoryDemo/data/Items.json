@@ -1,0 +1,38 @@
+[
+  {
+    "properties": {},
+    "tags": [],
+    "max_amount": 1,
+  },
+  {
+    "properties": {},
+    "tags": [],
+    "max_amount": 99,
+  },
+  {
+    "properties": {},
+    "tags": [],
+    "usage": [],
+    "max_amount": 1,
+  },
+  {
+    "properties": {},
+    "tags": ["usable_on_yourself"],
+    "max_amount": 1,
+   },
+  {
+    "properties": {},
+    "tags": [],
+    "max_amount": 16,
+    },
+  {
+     "properties": {"base_defense":10},
+    "tags": ["armor"],
+    "max_amount": 1,
+    },
+  {
+     "properties": {"storage_type":0},
+    "tags": ["storage","bag"],
+    "max_amount": 1,
+    }
+]

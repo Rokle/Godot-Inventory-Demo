@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://storages/small_chest/sprites/testSprFrames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://storages/small_chest/ChestObj.gd" type="Script" id=2]
+[ext_resource path="res://storages/small_chest/sprites/test_close.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="1" type="AnimatedSprite"]
+process_priority = -1
+frames = ExtResource( 1 )
+animation = "Close"
+offset = Vector2( 0, -4 )
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="MouseEnterZone" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
