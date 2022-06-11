@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://storages/small_chest/TestChest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/UIHolder.tscn" type="PackedScene" id=2]
+[ext_resource path="res://showcase/BagCreator.gd" type="Script" id=3]
+[ext_resource path="res://PlayerShowcase.gd" type="Script" id=4]
+
+[node name="Showcase" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="BagManager" type="Node" parent="Player"]
+script = ExtResource( 3 )
+
+[node name="chest1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 272, 176 )
+inventory_id = "test_chest_1"
+
+[node name="chest2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 336, 176 )
+inventory_id = "test_chest_2"
+
+[node name="UIHolder" parent="." instance=ExtResource( 2 )]
