@@ -239,7 +239,7 @@ func hovered_object_texture(object_texture):
 	if object_texture == null:
 		hovered_object = null
 	if hash(content) == hash(InventoryManager.empty_slot_preset):
-		hovered_object_sprite.texture = texture
+		hovered_object_sprite.texture = object_texture
 
 func slot_update(new_content):
 	content[0] = new_content[0]
