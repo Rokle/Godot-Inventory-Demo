@@ -29,33 +29,40 @@ func open_chest(state):
 func _area_entered(_player):
 	can_open = true
 	player = _player
+	
 	if interaction_rect.has_point(get_local_mouse_position()) == true:
 		InventoryManager.mouse_slot.hovered_object = self
 		InventoryManager.mouse_slot.hovered_object_texture(texture)
+	
 	set_process_input(true)
 
 func _area_exited():
 	can_open = false
 	if InventoryManager.current_storage == self:
 		InventoryManager.emit_signal("storage_set",self,storage_type)
+	
 	if InventoryManager.mouse_slot.hovered_object == self:
 		InventoryManager.mouse_slot.hovered_object_texture(null)
+	
 	set_process_input(false)
 
 
 func _input(_event):
-	if player != null:
-		if interaction_rect.has_point(get_local_mouse_position()) == true:
-			InventoryManager.mouse_slot.hovered_object = self
-			InventoryManager.mouse_slot.hovered_object_texture(texture)
-			if InventoryManager.mouse_slot.button_pressed == "right":
-				if InventoryManager.mouse_slot.click_used == false:
-					InventoryManager.mouse_slot.click_used = true
-					InventoryManager.emit_signal("storage_set",self,storage_type)
-					player.open_storage(not opened)
-			return
-		if InventoryManager.mouse_slot.hovered_object == self:
-			InventoryManager.mouse_slot.hovered_object_texture(null)
+	if player == null:
+		return
+	
+	if interaction_rect.has_point(get_local_mouse_position()) == true:
+		InventoryManager.mouse_slot.hovered_object = self
+		InventoryManager.mouse_slot.hovered_object_texture(texture)
+		if InventoryManager.mouse_slot.button_pressed == "right":
+			if InventoryManager.mouse_slot.click_used == false:
+				InventoryManager.mouse_slot.click_used = true
+				InventoryManager.emit_signal("storage_set",self,storage_type)
+				player.open_storage(not opened)
+		return
+	
+	if InventoryManager.mouse_slot.hovered_object == self:
+		InventoryManager.mouse_slot.hovered_object_texture(null)
 
 
 
