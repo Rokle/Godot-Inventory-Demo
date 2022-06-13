@@ -51,7 +51,7 @@ func _input(_event):
 	if player == null:
 		return
 	
-	if interaction_rect.has_point(get_local_mouse_position()) == true:
+	if interaction_rect.has_point(get_local_mouse_position()) == true and CorrectedMouseEnter.current_slot == null:
 		InventoryManager.mouse_slot.hovered_object = self
 		InventoryManager.mouse_slot.hovered_object_texture(texture)
 		if InventoryManager.mouse_slot.button_pressed == "right":
