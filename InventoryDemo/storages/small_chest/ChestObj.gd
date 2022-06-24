@@ -54,7 +54,7 @@ func _input(_event):
 	if interaction_rect.has_point(get_local_mouse_position()) == true and CorrectedMouseEnter.current_slot == null:
 		InventoryManager.mouse_slot.hovered_object = self
 		InventoryManager.mouse_slot.hovered_object_texture(texture)
-		if InventoryManager.mouse_slot.button_pressed == "right":
+		if InventoryManager.mouse_slot.button_pressed == "right" and Input.is_action_just_pressed("RightClick"):
 			if InventoryManager.mouse_slot.click_used == false:
 				InventoryManager.mouse_slot.click_used = true
 				InventoryManager.emit_signal("storage_set",self,storage_type)
