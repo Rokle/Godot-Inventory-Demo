@@ -46,11 +46,12 @@ func display_found(id):
 
 func hover_slot(slot_state,slot):
 	if slot_state == "enter" and slot != null:
-		hovered_slot = slot
-		InventoryManager.mouse_slot.show_stats(slot_state, hovered_slot.content[0])  
-	else:
-		hovered_slot = null
-		InventoryManager.mouse_slot.show_stats(slot_state, InventoryManager.empty_slot_preset[0])
+		if slot.get_parent().visible:
+			hovered_slot = slot
+			InventoryManager.mouse_slot.show_stats(slot_state, hovered_slot.content[0])  
+			return
+	hovered_slot = null
+	InventoryManager.mouse_slot.show_stats(slot_state, InventoryManager.empty_slot_preset[0])
 
 func select_slot(slot_to_select):
 	selected_slot.selected("none")
