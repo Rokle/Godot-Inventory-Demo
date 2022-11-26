@@ -66,6 +66,26 @@ func add_item(receiver_inventory_id: String, content: Array, var adding_interval
 	
 	return remaining_amount
 
+# content = [item_id, remove amount, properties]
+func remove_item(inventory_id: String, content: Array, var remove_completely = false, var remove_interval = [0,0]) -> void:
+	var remove_place = StorageData.storage_data[inventory_id]
+	emit_signal("find_display", inventory_id)
+	var item_id = content[0]
+	
+	var max_amount = ItemData.item_data[item_id]["max_amount"]
+	var remaining_amount = max_amount if remove_completely else content[1]
+	
+	var remove_range = get_adding_range(remove_place,remove_interval)
+	for slot_pos in remove_range:
+		if item_id == remove_place[slot_pos][0] and hash(content[2]) == hash(remove_place[slot_pos][2]):
+			var content_buffer = display.slots[slot_pos].content[1]
+			display.slots[slot_pos].content[1] = max(0,display.slots[slot_pos].content[1] - remaining_amount)
+			if not remove_completely:
+				remaining_amount = max(0, remaining_amount - content_buffer) 
+			
+		if remaining_amount == 0 and not remove_completely:
+			break
+
 func get_adding_range(add_place: Array, adding_interval: Array) -> Array:
 	var adding_step = 1
 	
