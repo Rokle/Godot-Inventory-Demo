@@ -18,13 +18,29 @@ export(Array) var item_tags_to_place = InventoryManager.default_item_tags_to_pla
 export(Array) var item_tags_to_take = InventoryManager.default_item_tags_to_take # item_tags_to_take[0] items that can be taked, item_tags_to_take[1] cant
 
 func _ready():
-	var rect = get_rect()
-	rect.position.x = rect_global_position.x
-	rect.position.y = rect_global_position.y
-	CorrectedMouseEnter.slots = [self, rect, get_parent().visible]
+	call_deferred("add_slot_prop_to_mouse_enter")
 	texture = $Control/ItemInventorySprite
 	text = $Control/ItemInventorySprite/Label
 	button = $TextureButton
+
+func add_slot_prop_to_mouse_enter():
+	var rect = get_rect()
+	rect.position.x = rect_global_position.x
+	rect.position.y = get_slot_y_pos()
+	CorrectedMouseEnter.slots = [self, rect, get_parent().visible]
+
+func get_slot_y_pos() -> float:
+	var group = get_parent()
+	var y_pos = display.layers[0].rect_global_position.y
+	var separation = display.get("custom_constants/separation")
+	
+	for layer in display.layers:
+		if layer == group:
+			break
+		
+		y_pos+=separation+layer.rect_size.y
+	
+	return y_pos
 
 func set_content(new_content):
 	content = new_content
