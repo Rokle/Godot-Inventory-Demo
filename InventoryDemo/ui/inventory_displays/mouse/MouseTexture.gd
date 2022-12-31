@@ -172,6 +172,7 @@ func _input(event):
 		else:
 			for i in range(distribute_items_to.size()):
 				distribute_items_to[i][0].selected("none")
+			InventoryManager.selected_slot.selected("selected")
 		last_hovered_slot = null
 		distribute_items_to = []
 		distributing = false
