@@ -22,6 +22,7 @@ func _ready():
 		for slot in group.get_children():
 			slots.append(slot)
 			slot.set_content(StorageData.storage_data[inventory_id][pos_to_give])
+			slot.pos = pos_to_give
 			pos_to_give += 1
 	inventory_changer(InventoryManager.inventory_is_open)
 
